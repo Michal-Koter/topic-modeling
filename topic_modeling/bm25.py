@@ -6,7 +6,7 @@ from rank_bm25 import BM25Okapi
 from validate import plot_wordcloud
 
 
-def convert_data(data, save_path= "./models/bm25_data.pt"):
+def convert_data(data, save_path= "../models/bm25_data.pt"):
     """
     Converts the input data into a document-term matrix (DTM) using the BM25 algorithm and saves it to a file.
 
@@ -47,7 +47,7 @@ def load_bm25_torch(save_path="bm25_data.pt"):
     Returns:
         tuple: A tuple containing the DTM as a numpy array and the vocabulary as a list of words.
     """
-    data = torch.load(save_path)
+    data = torch.load(f"../models/{save_path}")
     vocabulary = data["vocabulary"]
     dtm = data["dtm"]
     return dtm, vocabulary
@@ -77,7 +77,7 @@ def visualise(lda_model, dtm_sparse, vocabulary):
         sort_topics=False
     )
 
-    pyLDAvis.save_html(vis_data, "./static/html/lda_visualisation_bm25.html")
+    pyLDAvis.save_html(vis_data, "../static/html/lda_visualisation_bm25.html")
 
 
 def top_word(model, vocabulary):

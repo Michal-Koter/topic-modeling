@@ -45,7 +45,7 @@ def get_and_save_best(model, tokenised_data, model_type: ModelType = ModelType.L
     print(f"Best log likelihood Score for the LDA {model_type.value[2]}model", log_likelihood_m1)
     print(f"Perplixity Score on the LDA {model_type.value[2]}model", perplexity_m1)
 
-    joblib.dump(best_lda_model, f"./models/{model_type.value[1]}")
+    joblib.dump(best_lda_model, f"../models/{model_type.value[1]}")
     return best_lda_model
 
 
@@ -59,7 +59,7 @@ def load(model_type: ModelType = ModelType.LDA):
     Returns:
         object: The loaded model.
     """
-    return joblib.load(f"./models/{model_type.value[1]}")
+    return joblib.load(f"../models/{model_type.value[1]}")
 
 
 def visualise(model, tokenised_data, tokeniser, model_type: ModelType = ModelType.LDA):
@@ -73,7 +73,7 @@ def visualise(model, tokenised_data, tokeniser, model_type: ModelType = ModelTyp
         model_type (ModelType, optional): The type of model being used. Defaults to ModelType.LDA.
     """
     lda_panel = pyLDAvis.lda_model.prepare(model, tokenised_data, tokeniser, mds='tsne')
-    pyLDAvis.save_html(lda_panel, f"./static/html/{model_type.value[1]}")
+    pyLDAvis.save_html(lda_panel, f"../static/html/{model_type.value[1]}")
 
 
 def convert_labels(result):
