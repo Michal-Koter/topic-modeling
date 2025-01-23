@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "topic-modeling"
+version = "0.1.0"
+description = "Project for natural language processing classes"
+authors = ["Koter Michal <s24569@pjwstk.edu.pl>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "<3.13,>=3.12"
+transformers = "^4.48.0"
+notebook = "^7.3.2"
+jupyterlab = "^4.3.4"
+seaborn = "^0.13.2"
+datasets = "^3.2.0"
+spacy = "^3.8.4"
+nltk = "^3.9.1"
+#pyldavis = "^3.3.1"
+wordcloud = "^1.9.4"
+joblib = "^1.4.2"
+rank-bm25 = "^0.2.2"
+torch = {version = "^2.5.1+cu118", source = "pytorch-gpu-src"}
+scipy = "^1.15.1"
+
+
+
+[[tool.poetry.source]]
+name = "pytorch-gpu-src"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
