@@ -1,8 +1,11 @@
 # Topic Modeling
 
 ## Zbiór danych
-Wykorzystałem zbiór danych [JyotiNayak/political_ideologies](https://huggingface.co/datasets/JyotiNayak/political_ideologies?row=5),
+
+Wykorzystałem zbiór
+danych [JyotiNayak/political_ideologies](https://huggingface.co/datasets/JyotiNayak/political_ideologies?row=5),
 który zawiera 2560 tekstów wygenerowanych przez GPT-4. Orginalnie podzielone są na 8 kategorii:
+
 * economic
 * environmental
 * family/gender
@@ -13,6 +16,7 @@ który zawiera 2560 tekstów wygenerowanych przez GPT-4. Orginalnie podzielone s
 * social, health and education
 
 ### Wstępne przetwarzanie
+
 * Usunięcie znaków specjalnych
 * Usunięcie stop words
 * Lemmatyzacja
@@ -20,11 +24,13 @@ który zawiera 2560 tekstów wygenerowanych przez GPT-4. Orginalnie podzielone s
 ### Analiza zbioru
 
 #### Liczebność klas
-Każda z etykiet ma zbliżoną liczebność, co jest korzystne dla modelu. 
+
+Każda z etykiet ma zbliżoną liczebność, co jest korzystne dla modelu.
 
 <img src="static/plot/plot_2025-01-23 04-53-25_0.png">
 
 #### Dystrybucja długości tekstu
+
 Dla całego zbioru
 
 <img src="static/plot/plot_2025-01-23 04-53-00_0.png">
@@ -35,6 +41,7 @@ Można zauważyć, że rozkład długości tekstu w każdej klasie jest zbliżon
 <img src="static/plot/plot_2025-01-23 04-53-25_1.png">
 
 #### Najczęstsze słowa
+
 Sprawdzono najczęstsze słowa w zbiorze już po oczyszczeniu i lematyzacji.
 
 <img src="static/plot/plot_2025-01-23 04-53-25_2.png">
@@ -44,7 +51,9 @@ Dodatkowo sprawdzono częstotliwość występowania top 5 słów w poszczególny
 <img src="static/plot/plot_2025-01-23 04-53-25_3.png">
 
 ## Model
+
 W projekcie wykorzystano model LDA (Latent Dirichlet Allocation) z trzema reprerzentacjami tekstu:
+
 * CountVectorizer
 * TF-IDF
 * BM25
@@ -52,23 +61,29 @@ W projekcie wykorzystano model LDA (Latent Dirichlet Allocation) z trzema reprer
 Dla każdej z reprezentacji przeprowadzono proces optymalizacji liczby tematów, których ilość wynosiła od 5 do 13.
 
 ## Wyniki
+
 Dla każdego modelu sprawdzono metryki testowe:
+
 * precision
 * recall
 * f1-score
 
-Jednak nie jest to najlepsza metryka dla modeli LDA, ponieważ nie ma możliwości przypisania jednoznacznie dokumentu do jednej klasy.
+Jednak nie jest to najlepsza metryka dla modeli LDA, ponieważ nie ma możliwości przypisania jednoznacznie dokumentu do
+jednej klasy.
 
 Dlatego też postanowiono zwizualizować wyniki za pomocą:
+
 * WordCloud
 * pyLDAvis
 
 ### CountVectorizer
+
 Model z reprezentacją CountVectorizer osiągnął najlepsze wyniki dla 7 tematów.
 
 <img src="static/imgs/cv_result.png">
 
-Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej klasy dokumentów.
+Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej
+klasy dokumentów.
 
 <img src="static/imgs/cv_topic_map.png">
 
@@ -83,25 +98,32 @@ przypisanych dokumentów do odpowiadającyh klas (pomarańczowy), bazując na zm
 
 Wordcloud dla każdego z tematów:
 
-<img src="static/plot/plot_2025-01-23 04-53-25_5.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_6.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_7.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_8.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_9.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_10.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_11.png">
-
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_5.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_6.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_7.png" width="30%">
+</div>
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_8.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_9.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_10.png" width="30%">
+</div>
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_11.png" width="30%">
+</div>
 pyLDAvis:
 
 <img src="static/imgs/cv_pyLDAvis.png">
 Z pliku: static/pyLDAvis/lda_visualisation.html
 
 ### TF-IDF
+
 Model z reprezentacją TF-IDF osiągnął najlepsze wyniki dla 5 tematów.
 
 <img src="static/imgs/tfidf_result.png">
 
-Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej klasy dokumentów.
+Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej
+klasy dokumentów.
 
 <img src="static/imgs/tfidf_topic_map.png">
 
@@ -116,11 +138,15 @@ przypisanych dokumentów do odpowiadającyh klas (pomarańczowy), bazując na zm
 
 Wordcloud dla każdego z tematów:
 
-<img src="static/plot/plot_2025-01-23 04-53-25_13.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_14.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_15.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_16.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_17.png">
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_14.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_15.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_13.png" width="30%">
+</div>
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_16.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_17.png" width="30%">
+</div>
 
 pyLDAvis:
 
@@ -128,11 +154,13 @@ pyLDAvis:
 Z pliku: static/pyLDAvis/lda_visualisation_tfidf.html
 
 ### BM25
+
 Model z reprezentacją BM25 osiągnął najlepsze wyniki dla 5 tematów.
 
 <img src="static/imgs/bm_result.png">
 
-Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej klasy dokumentów.
+Jego klasy są mapowane na kategorie z oryginalnego zbioru danych na podstawie największej liczby przypisanych do danej
+klasy dokumentów.
 
 <img src="static/imgs/bm_topic_map.png">
 
@@ -147,11 +175,15 @@ przypisanych dokumentów do odpowiadającyh klas (pomarańczowy), bazując na zm
 
 Wordcloud dla każdego z tematów:
 
-<img src="static/plot/plot_2025-01-23 04-53-25_19.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_20.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_21.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_22.png">
-<img src="static/plot/plot_2025-01-23 04-53-25_23.png">
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_19.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_20.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_21.png" width="30%">
+</div>
+<div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="static/plot/plot_2025-01-23 04-53-25_22.png" width="30%">
+    <img src="static/plot/plot_2025-01-23 04-53-25_23.png" width="30%">
+</div>
 
 pyLDAvis:
 
@@ -161,6 +193,7 @@ Z pliku: static/pyLDAvis/lda_visualisation_bm25.html
 ## Narzędzia i środowisko
 
 ### Użyte narzędzia
+
 * Python 3.12
 * spaCy
 * nltk
@@ -177,6 +210,7 @@ Z pliku: static/pyLDAvis/lda_visualisation_bm25.html
 * datasets
 
 ### Środowisko sprzętowe
+
 * CPU: Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
 * GPU: NVIDIA GeForce RTX 2060
 * RAM: 32GB
